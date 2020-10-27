@@ -5,6 +5,7 @@
  */
 package physicscalcappgui;
 
+import frames.WelcomeFrame;
 import java.sql.DriverManager;
 
 /**
@@ -16,7 +17,8 @@ public class PhysicsCalcAppGUI {
     
    
     public static void main(String[] args) {
-        // TODO code application logic here
+        WelcomeFrame test = new WelcomeFrame();
+        
     }
     
 }
