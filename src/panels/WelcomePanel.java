@@ -5,12 +5,14 @@
  */
 package panels;
 
-
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -18,27 +20,51 @@ import javax.swing.JTextField;
  */
 public class WelcomePanel extends JPanel {
 
-    public WelcomePanel(int width, int height) {
-    
-        JPanel welcomePanel = new JPanel();
-        welcomePanel.setLayout(new GridLayout(1,4));
-        
-        JLabel welcomeMessage = new JLabel("Welcome to the Physics Calculator Application");
-        welcomeMessage.setSize(10, 10);
-        welcomePanel.add(welcomeMessage);
-        
-        JTextField username =  new JTextField("Username: ");
-        welcomePanel.add(username);
-        
-        JTextField password = new JTextField("Password");
-        welcomePanel.add(password);
-        
-        JLabel note = new JLabel("Note: Username and Password are case sensitive!");
-        welcomePanel.add(note);
-        
-        //welcomePanel.setOpaque(false);
-       // welcomePanel.setLocation(width, height);
-        //welcomePanel.setPreferredSize(new Dimension(width/2, height/2));
+    JPanel welcomePanel;
+    JLabel welcomeMessage, options, image, note, note2;
+    JButton logButton, guestButton, signUpButton;
+
+    public WelcomePanel() {
+
+        welcomePanel = new JPanel();
+
+        //Welcome Message 
+        welcomeMessage = new JLabel("Welcome to the Physics Calculator Application");
+        welcomeMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        welcomeMessage.setFont(new Font("Helvetica", Font.BOLD, 15));
+
+        //Options Label Assignment
+        options = new JLabel("Please select from the following:", SwingConstants.CENTER);
+        options.setHorizontalAlignment(SwingConstants.CENTER);
+
+        //Image assignment
+        image = new JLabel();
+        image.setIcon(new ImageIcon(getClass().getResource("WelcomeImage.jpg")));
+
+        //Button Assignment
+        logButton = new JButton("Log In");
+        guestButton = new JButton("Guest");
+        signUpButton = new JButton("Sign Up");
+
+        //Notes Assignment
+        note = new JLabel("Please not if you use Guest you will not be able to save data.");
+        note2 = new JLabel("At any time press X to exit. Note this will not save your data");
+
+        //Layout organisation
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+
+        //Adding components and alligning
+        add(image, gbc);
+        add(welcomeMessage, gbc);
+        add(options, gbc);
+        add(logButton, gbc);
+        add(guestButton, gbc);
+        add(signUpButton, gbc);
+        add(note, gbc);
+        add(note2, gbc);
+
     }
 
 }
