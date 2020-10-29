@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,14 +31,17 @@ public class ForceEquationsPanel extends JPanel{
         //Angular Force
         angularForce = new JButton("Angular Force");
         angularForce.setPreferredSize(new Dimension(210,30));
+        angularForce.addActionListener(new ButtonListener());
         
         //Linear Force
         linearForce = new JButton("Linear Force");
         linearForce.setPreferredSize(new Dimension(210,30));
+        linearForce.addActionListener(new ButtonListener());
         
         //Torque
         torque = new JButton("Torque");
         torque.setPreferredSize(new Dimension(210,30));
+        torque.addActionListener(new ButtonListener());
         
         //Layout organisation
         setLayout(new GridBagLayout());

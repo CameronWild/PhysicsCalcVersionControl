@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -24,14 +25,18 @@ public class ForceOptionsPanel extends JPanel{
         
         setLayout(new BorderLayout());
         
-        title = new JLabel("Conversions:");
+        title = new JLabel("Force Equations:");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         
         //Info button
         info = new JButton("Info");
+        info.setActionCommand("Force Info");
+        info.addActionListener(new ButtonListener());
         
         //Equations button
         equations = new JButton("Equations");
+        equations.setActionCommand("Force Eq");
+        equations.addActionListener(new ButtonListener());
         
         add(title, BorderLayout.PAGE_START);
         add(info, BorderLayout.EAST);

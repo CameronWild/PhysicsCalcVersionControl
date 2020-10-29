@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Oct 30 03:02:36 NZDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0175-74aa-decd-00000d649f80 
+on database directory E:\One Drive\OneDrive\Documents\NetBeansProjects\PhysicsCalcAppGUI\CalculatorDB with class loader sun.misc.Launcher$AppClassLoader@5c647e05 
+Loaded from file:/E:/One%20Drive/OneDrive/Documents/NetBeansProjects/PhysicsCalcAppGUI/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_261-b12
+user.dir=E:\One Drive\OneDrive\Documents\NetBeansProjects\PhysicsCalcAppGUI
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

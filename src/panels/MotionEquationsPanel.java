@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,14 +31,17 @@ public class MotionEquationsPanel extends JPanel{
         //Accelleration
         accelleration = new JButton("Accelleration");
         accelleration.setPreferredSize(new Dimension(210, 30));
-
+        accelleration.addActionListener(new ButtonListener());
+        
         //Linear Velocity
         linearVelocity = new JButton("Linear Velocity");
         linearVelocity.setPreferredSize(new Dimension(210, 30));
+        linearVelocity.addActionListener(new ButtonListener());
 
         //Angular Accelleration
         angularAccelleration = new JButton("Angular Accelleration");
         angularAccelleration.setPreferredSize(new Dimension(210, 30));
+        angularAccelleration.addActionListener(new ButtonListener());
 
         //Layout organisation
         setLayout(new GridBagLayout());

@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -30,9 +31,13 @@ public class MotionEquationOptionsPanel extends JPanel{
         
         //Info button
         info = new JButton("Info");
+        info.setActionCommand("Motion Info");
+        info.addActionListener(new ButtonListener());
         
         //Equations button
         equations = new JButton("Equations");
+        equations.setActionCommand("Motion Eq");
+        equations.addActionListener(new ButtonListener());
         
         add(title, BorderLayout.PAGE_START);
         add(info, BorderLayout.EAST);

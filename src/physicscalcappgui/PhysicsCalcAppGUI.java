@@ -5,8 +5,8 @@
  */
 package physicscalcappgui;
 
+import Database.DBConnect;
 import frames.DisposeableFrames;
-import frames.WelcomeFrame;
 
 /**
  *
@@ -15,15 +15,11 @@ import frames.WelcomeFrame;
 public class PhysicsCalcAppGUI {
 
     public static void main(String[] args) {
-        WelcomeFrame test4 = new WelcomeFrame("Test1");
-     //   WelcomeFrame test1 = new WelcomeFrame("Welcome");
-     //   DisposeableFrames test22 = new DisposeableFrames("LogIn");
-//        DisposeableFrames test3 = new DisposeableFrames("SignUp");
-        DisposeableFrames test = new DisposeableFrames("Test2");
-        DisposeableFrames test12 = new DisposeableFrames("Test21");
-        DisposeableFrames test2 = new DisposeableFrames("Test22");
-        DisposeableFrames test3 = new DisposeableFrames("Test23");
-        DisposeableFrames test33 = new DisposeableFrames("Test24");
+
+        DisposeableFrames test1 = new DisposeableFrames("Welcome");
+        
+        DBConnect test = new DBConnect();
+        
     }
 
 }

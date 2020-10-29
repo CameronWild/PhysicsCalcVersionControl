@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -31,14 +32,17 @@ public class ConversionEquationsPanel extends JPanel{
         //Degrees to Radians
         degreestoRadians = new JButton("Degrees to Radians Converter");
         degreestoRadians.setPreferredSize(new Dimension(210,30));
+        degreestoRadians.addActionListener(new ButtonListener());
         
         //Frequency
         frequency = new JButton("Frequency");
         frequency.setPreferredSize(new Dimension(210,30));
+        frequency.addActionListener(new ButtonListener());
         
         //Period
         period = new JButton("Period");
         period.setPreferredSize(new Dimension(210,30));
+        period.addActionListener(new ButtonListener());
         
         //Layout organisation
         setLayout(new GridBagLayout());

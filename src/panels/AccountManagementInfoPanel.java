@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -18,7 +19,7 @@ import javax.swing.SwingConstants;
  */
 public class AccountManagementInfoPanel extends JPanel{
         JLabel title;
-    JButton info, equations;
+    JButton info, account;
     
     public AccountManagementInfoPanel() {
         
@@ -29,13 +30,15 @@ public class AccountManagementInfoPanel extends JPanel{
         
         //Info button
         info = new JButton("App Info");
+        info.addActionListener(new ButtonListener());
         
-        //Equations button
-        equations = new JButton("Account");
+        //Account button
+        account = new JButton("Account");
+        account.addActionListener(new ButtonListener());
         
         add(title, BorderLayout.PAGE_START);
         add(info, BorderLayout.EAST);
-        add(equations,BorderLayout.WEST);
+        add(account,BorderLayout.WEST);
         
         setPreferredSize(new Dimension(200,50));
     }

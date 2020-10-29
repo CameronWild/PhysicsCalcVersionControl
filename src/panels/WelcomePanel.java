@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -42,10 +43,17 @@ public class WelcomePanel extends JPanel {
         image.setIcon(new ImageIcon(getClass().getResource("WelcomeImage.jpg")));
 
         //Button Assignment
+        //LogIn
         logButton = new JButton("Log In");
+        logButton.addActionListener(new ButtonListener());
+        
         guestButton = new JButton("Guest");
+        guestButton.addActionListener(new ButtonListener());
+        
+        //Sign Up Button
         signUpButton = new JButton("Sign Up");
-
+        signUpButton.addActionListener(new ButtonListener());
+        
         //Notes Assignment
         note = new JLabel("Please not if you use Guest you will not be able to save data.");
         note2 = new JLabel("At any time press X to exit. Note this will not save your data");

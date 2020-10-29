@@ -6,6 +6,7 @@
 package panels;
 
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -31,9 +32,13 @@ public class ConversionOptionsPanel extends JPanel{
         
         //Info button
         info = new JButton("Info");
+        info.setActionCommand("Conversion Info");
+        info.addActionListener(new ButtonListener());
         
         //Equations button
         equations = new JButton("Equations");
+        equations.setActionCommand("Conversion Eq");
+        equations.addActionListener(new ButtonListener());
         
         add(title, BorderLayout.PAGE_START);
         add(info, BorderLayout.EAST);

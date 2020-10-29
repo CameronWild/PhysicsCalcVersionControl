@@ -5,12 +5,14 @@
  */
 package panels;
 
-import actionListeners.TextFieldClearListener;
-import java.awt.Container;
+import ReuseableActionListeners.DisposeAction;
+import frames.DisposeableFrames;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,18 +27,18 @@ public class LogInPanel extends JPanel {
     JTextField username, password;
     JLabel usernameText, passwordText, logInText, note;
     JButton ok;
+    String usernameInput;
+    String passwordInput;
 
     public LogInPanel() {
 
         //username Text Field
-        username = new JTextField("Username");
+        username = new JTextField();
         username.setPreferredSize(new Dimension(100, 19));
-        username.addFocusListener(new TextFieldClearListener(username));
 
         //password text field
-        password = new JTextField("Password");
+        password = new JTextField();
         password.setPreferredSize(new Dimension(100, 19));
-        password.addFocusListener(new TextFieldClearListener(password));
 
         //labels
         usernameText = new JLabel("Username:");
@@ -47,6 +49,8 @@ public class LogInPanel extends JPanel {
 
         //Button
         ok = new JButton("Log In");
+        ok.addActionListener(new TextInput());
+        ok.addActionListener(new DisposeAction());
 
         //Layout organisation
         setLayout(new GridBagLayout());
@@ -64,4 +68,19 @@ public class LogInPanel extends JPanel {
         add(note, gbc);
         setPreferredSize(new Dimension(300, 200));
     }
+
+    private class TextInput implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            usernameInput = username.getText();
+            passwordInput = password.getText();
+            System.out.println(usernameInput);
+            System.out.println(passwordInput);
+        }
+
+    }
+
+   
+
 }
