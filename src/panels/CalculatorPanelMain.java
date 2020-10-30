@@ -17,37 +17,51 @@ import javax.swing.SwingConstants;
  *
  * @author Cam
  */
-public class CalculatorPanelMain extends JPanel{
-    
-    JLabel title;
-    
-    public CalculatorPanelMain(){
-        
+public class CalculatorPanelMain extends JPanel {
+
+    JLabel title, note;
+    public boolean logOut = true;
+
+    public CalculatorPanelMain() {
+
+    }
+
+    public CalculatorPanelMain(JPanel conv, JPanel mot, JPanel work, JPanel force, JPanel save, JPanel acc) {
+
         JPanel mid = new JPanel();
-        JPanel main = new JPanel();
-        
-        GridLayout layout = new GridLayout(3,2);
+
+        GridLayout layout = new GridLayout(3, 2);
         layout.setHgap(10);
         layout.setVgap(10);
         mid.setLayout(layout);
-        
+
         title = new JLabel("PHYSICS CALCULATOR OPTIONS");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        mid.add(new ConversionOptionsPanel());
-        mid.add(new MotionEquationOptionsPanel());
-        mid.add(new WorkEnergyOptionsPanel());
-        mid.add(new ForceOptionsPanel());
-        mid.add(new SavedDataOptionPanel());
-        mid.add(new AccountManagementInfoPanel());
-        
+        note = new JLabel("To exit press X on this window");
+        note.setHorizontalAlignment(SwingConstants.CENTER);
+
+        mid.add(conv);
+        mid.add(mot);
+        mid.add(work);
+        mid.add(force);
+        mid.add(save);
+        mid.add(acc);
+
         setLayout(new BorderLayout());
         add(title, BorderLayout.NORTH);
-        add(Box.createRigidArea(new Dimension(10,0)), BorderLayout.EAST);
-        add(Box.createRigidArea(new Dimension(10,0)), BorderLayout.WEST);
-        add(Box.createRigidArea(new Dimension(0,10)), BorderLayout.SOUTH);
+        add(Box.createRigidArea(new Dimension(20, 0)), BorderLayout.EAST);
+        add(Box.createRigidArea(new Dimension(20, 0)), BorderLayout.WEST);
         add(mid, BorderLayout.CENTER);
+        add(note, BorderLayout.SOUTH);
     }
-    
-}
 
+    public boolean isLogOut() {
+        return logOut;
+    }
+
+    public void setLogOut(boolean logOut) {
+        System.out.println("Set");
+        this.logOut = logOut;
+    }
+
+}

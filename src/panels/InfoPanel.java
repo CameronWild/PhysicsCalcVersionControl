@@ -19,8 +19,6 @@ import javax.swing.SwingConstants;
 public class InfoPanel extends JPanel {
 
     JLabel info;
-    JPanel inner;
-
     String text;
 
     public InfoPanel(String type) {
@@ -43,7 +41,7 @@ public class InfoPanel extends JPanel {
     public static String InfoText(String type) {
         String infoText = "";
         //Conversion info text
-        if (type.equals("Conversion")) {
+        if (type.equals("Conversion Info")) {
             infoText = "This where you can convert values"
                     + "\n Supported Functions:\n"
                     + "Degrees to Raidians: \n"
@@ -53,9 +51,8 @@ public class InfoPanel extends JPanel {
                     + "Equation: f = 1/T\n"
                     + "Period:\n"
                     + "Equation: T =  2 * PI / w";
-        } 
-        //Motion info text
-        else if (type.equals("Motion")) {
+        } //Motion info text
+        else if (type.equals("Motion Info")) {
             infoText = "This where you can calculate Accelleration and Velocity"
                     + "\n Supported Functions:\n"
                     + "Linear Accelleration: \n"
@@ -65,9 +62,8 @@ public class InfoPanel extends JPanel {
                     + "Equation: a = (wf - wi) / (tf - ti)\n"
                     + "Linear Velocity:\n"
                     + "Equation: v = (d/t)";
-        } 
-        //Work info text
-        else if (type.equals("Work")) {
+        } //Work info text
+        else if (type.equals("Work and Energy Info")) {
             infoText = "This where you can calculate Work and Energy"
                     + "\n Supported Functions:\n"
                     + "Linear Kinetic Energy: \n"
@@ -77,9 +73,8 @@ public class InfoPanel extends JPanel {
                     + "Equation: p  = m*v\n"
                     + "Linear Work:\n"
                     + "Equation: W = F*s";
-        } 
-        //Force Info Text
-        else if (type.equals("Force")) {
+        } //Force Info Text
+        else if (type.equals("Force Info")) {
             infoText = "This where you can calculate Force"
                     + "\n Supported Functions:\n"
                     + "Angular Force: \n"
@@ -89,8 +84,7 @@ public class InfoPanel extends JPanel {
                     + "Equation: F = m*a\n"
                     + "Torque:\n"
                     + "Equation: torque = F*r";
-        } 
-        //App Info Text
+        } //App Info Text
         else if (type.equals("App Info")) {
             infoText = "Welcome to the Physics Calculator GUI addition!\n\n"
                     + "We are currently working hard to implement all the functions\n"
@@ -116,7 +110,13 @@ public class InfoPanel extends JPanel {
                     + "Will take you to window with log out option\n\n"
                     + "App Info\n"
                     + "Will display this information again";
- 
+
+        }
+        else if(type.equals("Avaliable")){
+            infoText = "Username is avaliable";
+        }
+        else if(type.equals("Unavaliable")){
+            infoText = "Username is taken!!";
         }
 
         return infoText;

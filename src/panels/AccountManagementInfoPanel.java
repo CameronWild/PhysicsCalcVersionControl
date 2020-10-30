@@ -17,29 +17,30 @@ import javax.swing.SwingConstants;
  *
  * @author Cam
  */
-public class AccountManagementInfoPanel extends JPanel{
-        JLabel title;
+public class AccountManagementInfoPanel extends JPanel {
+
+    JLabel title;
     JButton info, account;
-    
+
     public AccountManagementInfoPanel() {
-        
+
         setLayout(new BorderLayout());
-        
+
         title = new JLabel("Account Management and App Info:");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         //Info button
         info = new JButton("App Info");
         info.addActionListener(new ButtonListener());
-        
+
         //Account button
         account = new JButton("Account");
         account.addActionListener(new ButtonListener());
-        
+
         add(title, BorderLayout.PAGE_START);
         add(info, BorderLayout.EAST);
-        add(account,BorderLayout.WEST);
-        
-        setPreferredSize(new Dimension(200,50));
+        add(account, BorderLayout.WEST);
+
+        setPreferredSize(new Dimension(200, 50));
     }
 }

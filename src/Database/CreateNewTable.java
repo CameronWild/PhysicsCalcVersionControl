@@ -15,23 +15,20 @@ import java.sql.Statement;
  */
 public class CreateNewTable {
 
-    public CreateNewTable(String username, Connection  conn) {
-        
-        try{
-        Statement statement = conn.createStatement();
-        String createTable ="CREATE TABLE"+username+"(TYPE VARCHAR(50) ,"
-                + "ANSWER DOUBLE" + "UNITS VARCHAR(50)"+"PASSWORD VARCHAR(50))";
-        statement.executeUpdate(createTable);
-        
-        statement.close();
-        }
-        
-        catch (SQLException ex){
-            //add message
+    public CreateNewTable(String username, Connection conn, String password) {
+
+        try (Statement statement = conn.createStatement()) {
+            String createTable = "CREATE  TABLE "+username+"  (INDEX INT,   TYPE  VARCHAR(50),   VALUE   FLOAT,   UNIT   VARCHAR(50), PASSWORD VARCHAR(50))";
+            statement.executeUpdate(createTable);
+            statement.addBatch("INSERT INTO "+username+" (password, index) values ('"+password+"', 1)");
+            statement.executeBatch();
+            System.out.println("Created");
+            
+            statement.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Fail" + ex.getMessage());
         }
     }
-    
-    
-    
-    
+
 }

@@ -5,6 +5,7 @@
  */
 package panels;
 
+import ReuseableActionListeners.ButtonListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,20 +18,20 @@ import javax.swing.SwingConstants;
  *
  * @author Cam
  */
-public class AccountPanel extends JPanel{
-           JLabel title;
+public class AccountPanel extends JPanel {
+
+    JLabel title;
     JButton logOut;
-    
+
     public AccountPanel() {
-        
-        
+
         title = new JLabel("Account Settings:");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         //LogOut
         logOut = new JButton("Log Out");
-        logOut.setPreferredSize(new Dimension(210,30));
-       
+        logOut.setPreferredSize(new Dimension(210, 30));
+        logOut.addActionListener(new ButtonListener());
         //Layout organisation
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -39,6 +40,7 @@ public class AccountPanel extends JPanel{
         //Add abd align componenets
         add(title, gbc);
         add(logOut, gbc);
-        
+
     }
+
 }

@@ -5,8 +5,9 @@
  */
 package physicscalcappgui;
 
-import Database.DBConnect;
-import frames.DisposeableFrames;
+import unittesting.PasswordMatchTest;
+
+
 
 /**
  *
@@ -14,12 +15,11 @@ import frames.DisposeableFrames;
  */
 public class PhysicsCalcAppGUI {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        DisposeableFrames test1 = new DisposeableFrames("Welcome");
+        GuiBuilder test = new GuiBuilder();
         
-        DBConnect test = new DBConnect();
-        
+       
     }
 
 }

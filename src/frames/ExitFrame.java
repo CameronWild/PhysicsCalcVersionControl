@@ -6,14 +6,7 @@
 package frames;
 
 import javax.swing.JFrame;
-import panels.AccountManagementInfoPanel;
-import panels.CalculatorPanelMain;
-import panels.ConversionOptionsPanel;
-import panels.InfoPanel;
-import panels.LogInPanel;
-import panels.SavedDataOptionPanel;
-import panels.SignUpPanel;
-import panels.WelcomePanel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,14 +16,12 @@ public class ExitFrame extends JFrame {
 
     JFrame frame;
 
-    public ExitFrame(String type) {
+    public ExitFrame(JPanel type) {
 
-        frame = new JFrame();
-
-
+        getContentPane().add(type);
 
         //frame settings
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

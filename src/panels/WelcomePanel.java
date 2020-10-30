@@ -5,10 +5,12 @@
  */
 package panels;
 
-import ReuseableActionListeners.ButtonListener;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,8 +24,12 @@ import javax.swing.SwingConstants;
 public class WelcomePanel extends JPanel {
 
     JPanel welcomePanel;
-    JLabel welcomeMessage, options, image, note, note2;
+    JLabel welcomeMessage, options, image, note;
     JButton logButton, guestButton, signUpButton;
+    Action action = new Action();
+    public String buttonText = "fail";
+    private boolean state = true;
+
 
     public WelcomePanel() {
 
@@ -45,18 +51,22 @@ public class WelcomePanel extends JPanel {
         //Button Assignment
         //LogIn
         logButton = new JButton("Log In");
-        logButton.addActionListener(new ButtonListener());
-        
+        logButton.setPreferredSize(new Dimension(100, 30));
+        logButton.addActionListener(action);
+        //Guest Button
         guestButton = new JButton("Guest");
-        guestButton.addActionListener(new ButtonListener());
-        
+        guestButton.addActionListener(action);
+        guestButton.setPreferredSize(new Dimension(100, 30));
         //Sign Up Button
         signUpButton = new JButton("Sign Up");
-        signUpButton.addActionListener(new ButtonListener());
-        
+        signUpButton.addActionListener(action);
+        signUpButton.setPreferredSize(new Dimension(100, 30));
+
         //Notes Assignment
-        note = new JLabel("Please not if you use Guest you will not be able to save data.");
-        note2 = new JLabel("At any time press X to exit. Note this will not save your data");
+        note = new JLabel("<html><div style ='text-align: center;'>Please note:<br>"
+                + "If you use Guest you will not be able to save or load data.<br>"
+                + "Press X to exit<br><br></html></div>");
+                
 
         //Layout organisation
         setLayout(new GridBagLayout());
@@ -71,8 +81,43 @@ public class WelcomePanel extends JPanel {
         add(guestButton, gbc);
         add(signUpButton, gbc);
         add(note, gbc);
-        add(note2, gbc);
+        
 
     }
 
+    public String getButtonText() {
+        return buttonText;
+    }
+
+    public void setButtonText(String buttonText) {
+        this.buttonText = buttonText;
+    }
+    
+    
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+
+    public class Action implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            JButton button = (JButton)e.getSource();
+            //if source is a button assing JButton casted source to it
+//            if (source instanceof JButton) {
+//                button = (JButton) source;
+//            }
+            //checks for assigned value
+            if (button != null) {
+                setButtonText(button.getText());  //assings button text
+                setState(false);
+            }
+        }
+    }
 }
