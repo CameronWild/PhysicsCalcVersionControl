@@ -9,12 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
+ * This class is a template for frames which are intended to exit when closed
  * @author Cam
  */
 public class ExitFrame extends JFrame {
 
-    JFrame frame;
 
     public ExitFrame(JPanel type) {
 

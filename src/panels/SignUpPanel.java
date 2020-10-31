@@ -5,7 +5,6 @@
  */
 package panels;
 
-import Database.CreateNewTable;
 import frames.DisposeableFrames;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,9 +12,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +21,7 @@ import unittesting.UsernameExistsTest;
 import unittesting.UsernameInputTest;
 
 /**
- *
+ * 
  * @author Cam
  */
 public class SignUpPanel extends JPanel {
@@ -66,9 +62,11 @@ public class SignUpPanel extends JPanel {
         //Text Fields
         username = new JTextField("");
         username.setPreferredSize(new Dimension(100, 19));
+        username.addActionListener(new CheckAvalableButton());
 
         password = new JTextField("");
         password.setPreferredSize(new Dimension(100, 19));
+        password.addActionListener(new TextInput());
 
         //Layout organisation
         setLayout(new GridBagLayout());
@@ -99,8 +97,15 @@ public class SignUpPanel extends JPanel {
             nameTest = new UsernameInputTest(getUsernameInput());
             nameState = nameTest.getValidation();
 
-            if (nameState == false) {
-                frame = new DisposeableFrames(new ErrorInfoPanel("Username"));
+            if(getUsernameInput().equalsIgnoreCase("guest")){
+                frame = new DisposeableFrames(new ErrorInfoPanel("Guest Username", ""));
+            }
+            if(getUsernameInput().equalsIgnoreCase("null")){
+                frame = new DisposeableFrames(new ErrorInfoPanel("Null Username", ""));
+            }
+            
+            else if (nameState == false) {
+                frame = new DisposeableFrames(new ErrorInfoPanel("Username", ""));
 
             } else if (nameState) {
 
@@ -128,7 +133,7 @@ public class SignUpPanel extends JPanel {
             nameState = nameTest.getValidation();
 
             if (nameState == false) {
-                frame = new DisposeableFrames(new ErrorInfoPanel("Username"));
+                frame = new DisposeableFrames(new ErrorInfoPanel("Username", ""));
             }
 
             if ((nameState)) {
@@ -142,15 +147,12 @@ public class SignUpPanel extends JPanel {
                     avaliable = new UsernameExistsTest(getUsernameInput(), getPasswordInput(), true);
                     usernameState = avaliable.isValidation();
                     if (usernameState) {
-                        JButton button = (JButton) e.getSource();
-
-                        //checks for assigned value
-                        if (button != null) {
+                            username.setText("");
+                            password.setText("");
                             setState(false);
-                        }
-                    }
-                    else{
-                        frame = new DisposeableFrames(new ErrorInfoPanel("Username Taken"));
+                        
+                    } else {
+                        frame = new DisposeableFrames(new ErrorInfoPanel("Username Taken", ""));
                     }
                 }
             }

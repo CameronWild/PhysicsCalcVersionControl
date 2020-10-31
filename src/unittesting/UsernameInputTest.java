@@ -8,7 +8,7 @@ package unittesting;
 
 
 /**
- *
+ * This class checks username input validity
  * @author Cam
  */
 public class UsernameInputTest {
@@ -19,6 +19,7 @@ public class UsernameInputTest {
     
     public UsernameInputTest(String usernameTest) {
 
+        //if good enables continue 
         if (inputCheck(usernameTest)) {
             this.setValidation(true);
         } else {
@@ -26,7 +27,7 @@ public class UsernameInputTest {
         }
 
     }
-
+    //Checks for correct input
     private boolean inputCheck(String usernameCheck) {
         boolean check = false;
         char[] inputChar = usernameCheck.toCharArray();

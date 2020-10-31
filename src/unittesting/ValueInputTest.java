@@ -5,40 +5,55 @@
  */
 package unittesting;
 
+import frames.DisposeableFrames;
+import panels.ErrorInfoPanel;
+
 /**
- *
+ * Checks number input in calculation text fields
  * @author Cam
  */
 public class ValueInputTest {
 
-    private Double value;
-    private Boolean validation;
+    private boolean validation;
+    DisposeableFrames error;
+    
+    //if true continues
+    public ValueInputTest(String valueInput, String eq) {
 
-    public ValueInputTest(String valueInput) {
-
-        if (inputCheck(valueInput)) {
+        if (inputCheck(valueInput, eq)) {
             this.setValidation(true);
         } else {
             this.setValidation(false);
         }
 
     }
-
-    private boolean inputCheck(String valueCheck) {
+    
+    //checks input
+    private boolean inputCheck(String valueCheck, String equation) {
 
         try {
             Double.parseDouble(valueCheck);
             return true;
         } catch (NumberFormatException e) {
+            //checks for spaces
+            if(valueCheck.contains(" ")){
+                error = new DisposeableFrames(new ErrorInfoPanel("Input Space",equation));
+            }
+            //checks for no input
+            else if(valueCheck.length() == 0){
+                error = new DisposeableFrames(new ErrorInfoPanel("No Input", equation));
+            }
+            else
+                error = new DisposeableFrames(new ErrorInfoPanel("Not Number", equation));
             return false;
         }
     }
 
-    public Boolean getValidation() {
+    public boolean isValidation() {
         return validation;
     }
 
-    public void setValidation(Boolean validation) {
+    public void setValidation(boolean validation) {
         this.validation = validation;
     }
 

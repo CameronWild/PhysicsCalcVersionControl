@@ -9,18 +9,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
+ * A template for frames which allow closing without exiting program
+ * 
  * @author Cam
  */
 public class DisposeableFrames extends JFrame {
 
-
-    public DisposeableFrames() {
-    }
     
     public DisposeableFrames(JPanel type) {
 
-        
+        //adds different panels 
         getContentPane().add(type);
         
         //frame settings

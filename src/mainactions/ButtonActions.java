@@ -3,39 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package actionOutcomes;
+package mainactions;
 
+import database.Values;
 import frames.DisposeableFrames;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import panels.AccellerationPanel;
 import panels.AccountPanel;
 import panels.AngularForcePanel;
-
+import panels.AnswerPanel;
 import panels.ComingSoonPanel;
 import panels.ConversionEquationsPanel;
 import panels.DegreestoRadiansPanel;
-
 import panels.ForceEquationsPanel;
 import panels.InfoPanel;
 import panels.LinearKineticEnergyPanel;
 import panels.MotionEquationsPanel;
+import panels.SavedData;
 import panels.WorkandEnergyEquationsPanel;
-import physicscalcappgui.GuiBuilder;
 
 /**
- *
+ * This class takes in different actions for JButtons and causes an outcome depending
+ * Needs more work.
  * @author Cam
  */
-public class ButtonActions2 {
+public class ButtonActions {
 
     DisposeableFrames disposeableFrame;
     private String type;
-    public boolean loggingOut = true;
+    Values valueSet = new Values();
+    static JFrame degreesFrame, kineticFrame, accellFrame, angForceFrame;
+    SolveAndSaveThread save;
 
-    public ButtonActions2() {
-    }
-
-    public ButtonActions2(String button, String info) {
+    public ButtonActions(String button, String info) {
+        
+        //Actions resulting from different named buttons
         switch (button) {
             case "App Info":
                 disposeableFrame = new DisposeableFrames(new InfoPanel(button));
@@ -47,18 +51,19 @@ public class ButtonActions2 {
                 disposeableFrame = new DisposeableFrames(new InfoPanel(info));
                 break;
             case "Degrees to Radians Converter":
-                disposeableFrame = new DisposeableFrames(new DegreestoRadiansPanel());
+                degreesFrame = new DisposeableFrames(new DegreestoRadiansPanel());
                 break;
             case "Linear Kinetic Energy":
-                disposeableFrame = new DisposeableFrames(new LinearKineticEnergyPanel());
+                kineticFrame = new DisposeableFrames(new LinearKineticEnergyPanel());
                 break;
             case "Accelleration":
-                disposeableFrame = new DisposeableFrames(new AccellerationPanel());
+                accellFrame = new DisposeableFrames(new AccellerationPanel());
                 break;
             case "Angular Force":
-                disposeableFrame = new DisposeableFrames(new AngularForcePanel());
+                angForceFrame = new DisposeableFrames(new AngularForcePanel());
                 break;
             case "Log Out":
+                //Closes all active windows and brings GUI BUILDER to beginning of loop
                 System.gc();
                 java.awt.Window win[] = java.awt.Window.getWindows();
                 for (int i = 0; i < win.length; i++) {
@@ -66,6 +71,8 @@ public class ButtonActions2 {
                     win[i] = null;
                 }
                 break;
+                
+            //Comming soon buttons
             case "Frequency":
             case "Period":
             case "Linear Momentum":
@@ -74,10 +81,30 @@ public class ButtonActions2 {
             case "Angular Accelleration":
             case "Linear Force":
             case "Torque":
-                //case "":
                 disposeableFrame = new DisposeableFrames(new ComingSoonPanel());
                 break;
+                
+            //Solve button action
+            case "Solve": {
+                try {
+                    save = new SolveAndSaveThread(info);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ButtonActions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                disposeableFrame = new DisposeableFrames(new AnswerPanel());
+            }
+            break;
+            
+            //View data button 
+            case "View Data":
+                //checks if guest attempting to view
+                if(!Values.getUsername().equals("guest"))
+                    disposeableFrame = new DisposeableFrames(new SavedData());
+                else
+                    disposeableFrame = new DisposeableFrames(new InfoPanel("Guest"));
         }
+        
+        //Button actions which all have same button name
         switch (info) {
             case "Conversion Eq":
                 disposeableFrame = new DisposeableFrames(new ConversionEquationsPanel());
@@ -91,17 +118,6 @@ public class ButtonActions2 {
             case "Motion Eq":
                 disposeableFrame = new DisposeableFrames(new MotionEquationsPanel());
                 break;
-
         }
-
     }
-
-    public boolean isLoggingOut() {
-        return loggingOut;
-    }
-
-    public void setLoggingOut(boolean loggingOut) {
-        this.loggingOut = loggingOut;
-    }
-
 }

@@ -5,21 +5,19 @@
  */
 package unittesting;
 
-import Database.CreateNewTable;
+import database.CreateNewTable;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import physicscalcappgui.GuiBuilder;
 
 /**
- *
+ * This class checks if username already exists
  * @author Cam
  */
 public class UsernameExistsTest {
 
-    //String usernameCheck = this.username;
     private boolean validation = true;
     CreateNewTable newUser;
     String urlCheck = "jdbc:derby:CalculatorDB; create=true";
@@ -29,32 +27,40 @@ public class UsernameExistsTest {
     public UsernameExistsTest(String userCheck, String password, boolean create) {
 
         Connection con = null;
+
         try {
-            con = DriverManager.getConnection(urlCheck, user, pass);
-            DatabaseMetaData data = con.getMetaData();
-            String[] types = {"TABLE"};
-            ResultSet rs = data.getTables(null, null, null, types);
-            
-            while (rs.next()) {
-                String table_name = rs.getString("TABLE_NAME");
-                System.out.println(table_name);
-                if (table_name.equalsIgnoreCase(userCheck)) {
-                    setValidation(false);
-                    break;
-                 
-                } else {
-                    setValidation(true);
-                    //break;
+            //if username is not GUEST continues 
+            if (!userCheck.equalsIgnoreCase("guest") || !userCheck.equalsIgnoreCase("null")) {
+                
+                con = DriverManager.getConnection(urlCheck, user, pass);
+                DatabaseMetaData data = con.getMetaData();
+                String[] types = {"TABLE"};
+                ResultSet rs = data.getTables(null, null, null, types);
+
+                //checks through tables to see if username(table) exists
+                while (rs.next()) {
+                    String table_name = rs.getString("TABLE_NAME");
+                    System.out.println(table_name);
+                    if (table_name.equalsIgnoreCase(userCheck)) {
+                        setValidation(false);
+                        break;
+
+                    } else {
+                        setValidation(true);
+                        //break;
+                    }
                 }
-            }
-            if ((create == true) && (validation)) {
-                newUser = new CreateNewTable(userCheck, con, password);
-            }
+                //if username is free and create is true (enables check avaliablitiy) then creates new table (user)
+                if ((create == true) && (validation)) {
+                    newUser = new CreateNewTable(userCheck, con, password);
+                }
             rs.close();
             con.close();
+            }
+            
 
         } catch (SQLException e) {
-            System.out.println("Oops");
+            System.out.println("Username Exists Error");
         }
     }
 

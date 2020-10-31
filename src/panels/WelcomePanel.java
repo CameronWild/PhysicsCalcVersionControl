@@ -109,10 +109,7 @@ public class WelcomePanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             
             JButton button = (JButton)e.getSource();
-            //if source is a button assing JButton casted source to it
-//            if (source instanceof JButton) {
-//                button = (JButton) source;
-//            }
+
             //checks for assigned value
             if (button != null) {
                 setButtonText(button.getText());  //assings button text

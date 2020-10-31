@@ -118,6 +118,12 @@ public class InfoPanel extends JPanel {
         else if(type.equals("Unavaliable")){
             infoText = "Username is taken!!";
         }
+        else if(type.equals("Guest")){
+            infoText = "You are using a guest account! \n"
+                    + "If you wish to save data and be able to view it\n"
+                    + "you need an account.\n"
+                    + "You can log out of guest and make one in the account section.";
+        }
 
         return infoText;
     }

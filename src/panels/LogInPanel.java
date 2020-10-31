@@ -28,7 +28,7 @@ public class LogInPanel extends JPanel {
 
     private boolean state = true;
 
-    JTextField username, password;
+    public JTextField username, password;
     JLabel usernameText, passwordText, logInText, note1, note2;
     JButton ok;
     private String usernameInput;
@@ -46,10 +46,12 @@ public class LogInPanel extends JPanel {
         //username Text Field
         username = new JTextField();
         username.setPreferredSize(new Dimension(100, 19));
-
+        username.addActionListener(new Action());
+        
         //password text field
         password = new JTextField();
         password.setPreferredSize(new Dimension(100, 19));
+        password.addActionListener(new Action());
 
         //labels
         usernameText = new JLabel("Username:");
@@ -93,7 +95,7 @@ public class LogInPanel extends JPanel {
             
             //check for username input
             if (nameState == false) {   
-                frame = new DisposeableFrames(new ErrorInfoPanel("Username"));
+                frame = new DisposeableFrames(new ErrorInfoPanel("Username", ""));
             } 
             //if username input is good carrys on
             else{
@@ -102,7 +104,7 @@ public class LogInPanel extends JPanel {
                 usernameState = avaliable.isValidation();
                 
                 if(usernameState){
-                    frame = new DisposeableFrames(new ErrorInfoPanel("Username not found"));
+                    frame = new DisposeableFrames(new ErrorInfoPanel("Username not found", ""));
                 }
                 
                 else if ((usernameState==false) && (nameState)) {
@@ -114,12 +116,8 @@ public class LogInPanel extends JPanel {
                         //do nothing
 
                     } else {
-                        JButton button = (JButton) e.getSource();
-
-                        //checks for assigned value
-                        if (button != null) {
                             setState(false);
-                        }
+                            //password.setText("");
                     }
                 }
             }

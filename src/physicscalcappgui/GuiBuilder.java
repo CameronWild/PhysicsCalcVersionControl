@@ -5,6 +5,7 @@
  */
 package physicscalcappgui;
 
+import database.Values;
 import frames.DisposeableFrames;
 import frames.ExitFrame;
 
@@ -13,22 +14,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import panels.AccountManagementInfoPanel;
 import panels.CalculatorPanelMain;
-import panels.ConversionOptionsPanel;
 import panels.ErrorInfoPanel;
-import panels.ForceOptionsPanel;
-import panels.InfoPanel;
 import panels.LogInPanel;
-import panels.MotionEquationOptionsPanel;
-import panels.SavedDataOptionPanel;
 import panels.SignUpPanel;
 import panels.WelcomePanel;
-import panels.WorkEnergyOptionsPanel;
 import unittesting.PasswordMatchTest;
 
 /**
- *
+ * Main class for carry out program. Will loop until user exits program.
  * @author Cam
  */
 public class GuiBuilder extends JFrame {
@@ -53,26 +47,20 @@ public class GuiBuilder extends JFrame {
     PasswordMatchTest passwordTest;
     boolean hold = true;
     boolean close = true;
-
     WelcomePanel welcomePanel = new WelcomePanel();
     LogInPanel logInPanel = new LogInPanel();
     SignUpPanel signUpPanel = new SignUpPanel();
-    InfoPanel appInfo = new InfoPanel("App Info");
-    ConversionOptionsPanel convOpt = new ConversionOptionsPanel();
-    MotionEquationOptionsPanel motOpt = new MotionEquationOptionsPanel();
-    WorkEnergyOptionsPanel workOpt = new WorkEnergyOptionsPanel();
-    ForceOptionsPanel forceOpt = new ForceOptionsPanel();
-    SavedDataOptionPanel saveDataOpt = new SavedDataOptionPanel();
-    AccountManagementInfoPanel accOpt = new AccountManagementInfoPanel();
-    CalculatorPanelMain mainPanel = new CalculatorPanelMain(convOpt, motOpt, workOpt, forceOpt, saveDataOpt, accOpt);
+    CalculatorPanelMain mainPanel = new CalculatorPanelMain();
 
     public GuiBuilder() throws InterruptedException {
-
+        //not sure if needed
         try {
             conn = DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
             System.err.println("SQL Exception: " + e.getMessage());
         }
+        
+        //beginningg of program
         while (close) {
             //Opens Welcome Frame first
             welcomeFrame = new ExitFrame(welcomePanel);
@@ -98,36 +86,40 @@ public class GuiBuilder extends JFrame {
                         while (logInPanel.isState()) {
                             Thread.sleep(1000);
                         }
-                        username = logInPanel.getUsernameInput();
+                        Values.setUsername(logInPanel.getUsernameInput());
                         password = logInPanel.getPasswordInput();
 
-                        passwordTest = new PasswordMatchTest(username, password);
+                        passwordTest = new PasswordMatchTest(Values.getUsername(), password);
 
                         if (passwordTest.isValidation()) {
                             hold = false;
                         } else {
-                            error = new DisposeableFrames(new ErrorInfoPanel("Incorrect Password"));
+                            error = new DisposeableFrames(new ErrorInfoPanel("Incorrect Password", ""));
                             hold = true;
                         }
                         logInPanel.setState(true);
+                        logInPanel.password.setText("");
                     }
+                    logInPanel.username.setText("");
                     hold = true;
                     logIn.dispose();
                     break;
+                    
+                //If user selects guest
                 case "Guest":
-                    username = "guest";
+                    Values.setUsername("guest");
                     password = "guest";
                     break;
+                    
+                //If user slects sign up
                 case "Sign Up":
                     signUp = new ExitFrame(signUpPanel);
                     signUp.toFront();
                     while (signUpPanel.isState()) {
                         Thread.sleep(1000);
                     }
-                    username = signUpPanel.getUsernameInput();
+                    Values.setUsername(signUpPanel.getUsernameInput());
                     password = signUpPanel.getPasswordInput();
-                    System.out.println(username);
-                    System.out.println(password);
                     //if unit test passes
                     signUpPanel.setState(true);
                     signUp.dispose();
@@ -141,89 +133,11 @@ public class GuiBuilder extends JFrame {
             while (main.isVisible()) {
                 Thread.sleep(1000);
             }
-            System.out.println("testend");
-        }
-
-    }
-    
-    public static class ButtonActions {
-
-    DisposeableFrames disposeableFrame;
-    private String type;
-    public boolean loggingOut = true;
-
-    public ButtonActions() {
-    }
-
-    public ButtonActions(String button, String info) {
-        switch (button) {
-            case "App Info":
-                disposeableFrame = new DisposeableFrames(new InfoPanel(button));
-                break;
-            case "Account":
-                disposeableFrame = new DisposeableFrames(new AccountPanel());
-                break;
-            case "Info":
-                disposeableFrame = new DisposeableFrames(new InfoPanel(info));
-                break;
-            case "Degrees to Radians Converter":
-                disposeableFrame = new DisposeableFrames(new DegreestoRadiansPanel());
-                break;
-            case "Linear Kinetic Energy":
-                disposeableFrame = new DisposeableFrames(new LinearKineticEnergyPanel());
-                break;
-            case "Accelleration":
-                disposeableFrame = new DisposeableFrames(new AccellerationPanel());
-                break;
-            case "Angular Force":
-                disposeableFrame = new DisposeableFrames(new AngularForcePanel());
-                break;
-            case "Log Out":
-                System.gc();
-                java.awt.Window win[] = java.awt.Window.getWindows();
-                for (int i = 0; i < win.length; i++) {
-                    win[i].dispose();
-                    win[i] = null;
-                }
-                break;
-            case "Frequency":
-            case "Period":
-            case "Linear Momentum":
-            case "Linear Work":
-            case "Linear Velocity":
-            case "Angular Accelleration":
-            case "Linear Force":
-            case "Torque":
-                //case "":
-                disposeableFrame = new DisposeableFrames(new ComingSoonPanel());
-                break;
-        }
-        switch (info) {
-            case "Conversion Eq":
-                disposeableFrame = new DisposeableFrames(new ConversionEquationsPanel());
-                break;
-            case "Force Eq":
-                disposeableFrame = new DisposeableFrames(new ForceEquationsPanel());
-                break;
-            case "Work and Energy Eq":
-                disposeableFrame = new DisposeableFrames(new WorkandEnergyEquationsPanel());
-                break;
-            case "Motion Eq":
-                disposeableFrame = new DisposeableFrames(new MotionEquationsPanel());
-                break;
+            System.out.println("Logged Out");
 
         }
 
-    }
-
-    public boolean isLoggingOut() {
-        return loggingOut;
-    }
-
-    public void setLoggingOut(boolean loggingOut) {
-        this.loggingOut = loggingOut;
     }
 
 }
 
-}

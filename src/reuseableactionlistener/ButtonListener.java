@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReuseableActionListeners;
+package reuseableactionlistener;
 
-import actionOutcomes.ButtonActions2;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JTextField;
-import physicscalcappgui.GuiBuilder.ButtonActions;
+import mainactions.ButtonActions;
+
+
 
 /**
- *
+ * A generic button listener for button which only open a new window
  * @author Cam
  */
 public class ButtonListener implements ActionListener {
@@ -21,8 +21,6 @@ public class ButtonListener implements ActionListener {
     ButtonActions action;
     private String buttonText = "";
     private String info = "";
-
-    
 
     public ButtonListener() {
         super();
@@ -41,13 +39,12 @@ public class ButtonListener implements ActionListener {
             setButtonText(button.getText());  //assings button text
             setInfo(e.getActionCommand());    //gets button action command
         }
-        
+
         action = new ButtonActions(getButtonText(), getInfo());
-      
 
     }
-
-
+    
+    //getter and setters
     public String getButtonText() {
         return buttonText;
     }
@@ -63,5 +60,5 @@ public class ButtonListener implements ActionListener {
     public void setInfo(String info) {
         this.info = info;
     }
-    
+
 }

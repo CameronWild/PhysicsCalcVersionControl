@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import panels.ErrorInfoPanel;
 
 /**
- *
+ * Class for checking password input
  * @author Cam
  */
 public class PasswordInputTest {
@@ -21,6 +21,7 @@ public class PasswordInputTest {
 
     public PasswordInputTest(String passwordTest) {
 
+        //If password is good enables continue
         if (inputCheck(passwordTest)) {
             this.setValidation(true);
         } else {
@@ -29,15 +30,23 @@ public class PasswordInputTest {
 
     }
 
+    //checks input
     private boolean inputCheck(String passwordCheck) {
         boolean check;
             System.out.println(passwordCheck);
+            //if contains a space
             if (passwordCheck.contains(" ")) {
-                error = new DisposeableFrames(new ErrorInfoPanel("Password"));
+                error = new DisposeableFrames(new ErrorInfoPanel("Password", ""));
                 check = false;
             }
+            //if has no value
             else if(passwordCheck.length() == 0){
-                error = new DisposeableFrames(new ErrorInfoPanel("Password Length"));
+                error = new DisposeableFrames(new ErrorInfoPanel("Password Length", ""));
+                check = false;
+            }
+            // null check
+            else if(passwordCheck.equalsIgnoreCase("null")){
+                error = new DisposeableFrames(new ErrorInfoPanel("Password Null", ""));
                 check = false;
             }
                 
@@ -48,6 +57,7 @@ public class PasswordInputTest {
         return check;
     }
 
+    //getter and setters
     public Boolean getValidation() {
         return validation;
     }

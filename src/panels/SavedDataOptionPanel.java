@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import reuseableactionlistener.ButtonListener;
 
 /**
  *
@@ -27,8 +28,10 @@ public class SavedDataOptionPanel extends JPanel{
         title = new JLabel("Saved Data:");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         
+        
         //Info button
         savedData = new JButton("View Data");
+        savedData.addActionListener(new ButtonListener());
         
         add(title, BorderLayout.PAGE_START);
         add(savedData,BorderLayout.CENTER);
